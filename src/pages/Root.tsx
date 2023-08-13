@@ -8,7 +8,7 @@ export default function Root() {
 
 
     return (
-        <div>
+        <div className="bg-lime-800">
             <div>
                 <Navbar />
             </div>
