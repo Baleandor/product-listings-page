@@ -2,6 +2,8 @@ import { supabaseApiCalls } from '../api/supabaseApiCalls'
 import { useEffect, useState } from 'react'
 import CategoryItem from '../components/CategoryItem'
 import { displayedNumberOfItems } from '../utils/numberOfItemsDisplayedAtOneTime'
+import CategoryNameAndDescription from '../components/CategoryNameAndDescription'
+import { useLocation } from 'react-router'
 
 
 
@@ -11,6 +13,9 @@ export default function Buggiez() {
 
     const [buggiez, setBuggiez] = useState([])
     const [visibleCartItems, setVisibleCartItems] = useState(displayedNumberOfItems)
+
+    const { pathname } = useLocation()
+    const urlPath = pathname.slice(1)
 
     const { data: buggyData, error, isLoading } = supabaseApiCalls.getAllBuggiezQuery()
 
@@ -30,6 +35,7 @@ export default function Buggiez() {
 
 
         <div className='p-2 flex flex-col items-center'>
+            <CategoryNameAndDescription categoryName={urlPath} />
             <div className='p-2'>
                 <span>Displaying {displayedNumberOfItems} out of {buggiez.length} items.</span>
             </div>
