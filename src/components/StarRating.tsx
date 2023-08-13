@@ -1,4 +1,6 @@
-import { Rating } from 'react-simple-star-rating'
+import { Rate } from 'antd'
+
+
 type StarRatingProps = {
     rating: number
 }
@@ -6,6 +8,6 @@ type StarRatingProps = {
 export default function StarRating({ rating }: StarRatingProps) {
 
     return (
-        <Rating initialValue={rating} readonly size={27} SVGstyle={{ display: 'inline' }} />
+        <Rate defaultValue={rating} disabled/>
     )
 }
