@@ -1,5 +1,6 @@
 import StarRating from "./StarRating"
 
+
 type CategoryItemType = {
     id: string,
     color: string,
@@ -11,11 +12,9 @@ type CategoryItemType = {
 }
 
 
-
-
-
 export default function CategoryItem({ categoryItem }: CategoryItemType) {
-    console.log(categoryItem)
+
+
     return (
         <div className="border rounded-xl border-green-400 p-1 mb-2 flex items-center w-[700px]" key={categoryItem.id}>
             <div>
@@ -32,7 +31,6 @@ export default function CategoryItem({ categoryItem }: CategoryItemType) {
                     <button className="p-1 border rounded-xl border-red-600">Add to Cart</button>
                 </div>
             </div>
-
         </div>
     )
 }
