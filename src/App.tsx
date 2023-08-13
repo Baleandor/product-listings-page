@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Root from "./pages/Root";
 import NotFound from "./pages/NotFound";
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+import ProductListings from "./pages/ProductListings";
 
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<Root />} errorElement={<NotFound />}>
+      <Route index element={<ProductListings />} />
 
     </Route>
   ))
