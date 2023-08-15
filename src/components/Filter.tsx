@@ -4,11 +4,12 @@ import { Slider } from 'antd';
 
 
 type FilterPropsType = {
-    setCheckboxFilter: (checkboxState: string) => void
+    setCheckboxFilter: (checkboxState: string) => void,
+    setPriceSliderFilter: (priceFilter: number[]) => void
 }
 
 
-export default function Filter({ setCheckboxFilter }: FilterPropsType) {
+export default function Filter({ setCheckboxFilter, setPriceSliderFilter }: FilterPropsType) {
 
     const onCheckboxChange = (e: CheckboxChangeEvent) => {
 
@@ -19,13 +20,9 @@ export default function Filter({ setCheckboxFilter }: FilterPropsType) {
         }
     }
 
-    const onSliderChange = (e) => {
-        console.log(e.target.value)
+    const onSliderChange = (e: number[]) => {
+        setPriceSliderFilter(e)
     }
-
-
-
-    <Slider range={{ draggableTrack: true }} defaultValue={[20, 50]} />
 
 
     return (

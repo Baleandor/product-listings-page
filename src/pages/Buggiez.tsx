@@ -41,13 +41,18 @@ export default function Buggiez() {
         }
     }
 
+    const setPriceSliderFilter = (priceFilter: number[]) => {
+        const filterResult = [...buggyData].filter((element) => element.price >= priceFilter[0] && element.price <= priceFilter[1])
+
+        setBuggiez(filterResult)
+    }
 
 
     return (
 
         <div className='flex p-1'>
             <div className='mr-auto'>
-                <Filter setCheckboxFilter={setCheckboxFilter} />
+                <Filter setCheckboxFilter={setCheckboxFilter} setPriceSliderFilter={setPriceSliderFilter} />
             </div>
 
             <div className='p-1 flex mr-auto flex-col items-center'>
