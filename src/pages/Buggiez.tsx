@@ -5,6 +5,7 @@ import { displayedNumberOfItems } from '../utils/numberOfItemsDisplayedAtOneTime
 import CategoryNameAndDescription from '../components/CategoryNameAndDescription'
 import { useLocation } from 'react-router'
 import Filter from '../components/Filter'
+import SortOrder from '../components/SortOrder'
 
 
 
@@ -35,18 +36,61 @@ export default function Buggiez() {
         if (checkboxState === '') {
             setBuggiez(buggyData)
         } else {
-            const filterResult = [...buggyData].filter((element) => element.color === checkboxState)
+            const filterResult = [...buggiez].filter((element) => element.color === checkboxState)
 
             setBuggiez(filterResult)
         }
     }
 
     const setPriceSliderFilter = (priceFilter: number[]) => {
-        const filterResult = [...buggyData].filter((element) => element.price >= priceFilter[0] && element.price <= priceFilter[1])
+        const filterResult = [...buggiez].filter((element) => element.price >= priceFilter[0] && element.price <= priceFilter[1])
 
         setBuggiez(filterResult)
     }
 
+    const sortAToZ = () => {
+        const sortResult = [...buggiez].sort((a, b) => {
+            const nameA = a.name.toLowerCase()
+            const nameB = b.name.toLowerCase()
+            if (nameA < nameB) {
+                return -1
+            }
+            if (nameA > nameB) {
+                return 1
+            }
+            return 0
+        })
+        setBuggiez(sortResult)
+    }
+
+    const sortZToA = () => {
+        const sortResult = [...buggiez].sort((a, b) => {
+            const nameA = a.name.toLowerCase()
+            const nameB = b.name.toLowerCase()
+            if (nameB < nameA) {
+                return -1
+            }
+            if (nameB > nameA) {
+                return 1
+            }
+            return 0
+        })
+        setBuggiez(sortResult)
+    }
+
+    const sortPriceAscending = () => {
+        const sortResult = [...buggiez].sort((a, b) => {
+            return a.price - b.price
+        })
+        setBuggiez(sortResult)
+    }
+
+    const sortPriceDescending = ()=> {
+        const sortResult = [...buggiez].sort((a, b) => {
+            return b.price - a.price
+        })
+        setBuggiez(sortResult)
+    }
 
     return (
 
@@ -56,6 +100,7 @@ export default function Buggiez() {
             </div>
 
             <div className='p-1 flex mr-auto flex-col items-center'>
+                <SortOrder sortAToZ={sortAToZ} sortZToA={sortZToA} sortPriceAscending={sortPriceAscending} sortPriceDescending={sortPriceDescending}/>
                 <CategoryNameAndDescription categoryName={urlPath} />
                 <div className='p-2'>
                     <span>
