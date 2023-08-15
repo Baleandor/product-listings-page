@@ -1,18 +1,21 @@
 import StarRating from "./StarRating"
 
 
-type CategoryItemType = {
-    id: string,
-    color: string,
-    price: number,
-    image: string,
-    description: string,
-    name: string,
-    rating: number
+type CategoryItemPropsType = {
+    categoryItem: {
+        id: string,
+        color: string,
+        price: number,
+        image: string,
+        description: string,
+        name: string,
+        rating: number
+    }
+
 }
 
 
-export default function CategoryItem({ categoryItem }: CategoryItemType) {
+export default function CategoryItem({ categoryItem }: CategoryItemPropsType) {
 
 
     return (
