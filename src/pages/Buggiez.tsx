@@ -20,11 +20,12 @@ export default function Buggiez() {
     const { pathname } = useLocation()
     const urlPath = pathname.slice(1)
 
-    const { data: buggyData, error, isLoading } = supabaseApiCalls.getAllBuggiezQuery()
+    const { data: buggyData, error, isLoading } = supabaseApiCalls.getAllItemsQuery(visibleCartItems, urlPath)
+
 
     useEffect(() => {
         if (buggyData != undefined && !error) {
-            setBuggiez(buggyData)
+            setBuggiez(buggyData.data)
         }
     }, [buggyData])
 
@@ -34,7 +35,7 @@ export default function Buggiez() {
 
     const setCheckboxFilter = (checkboxState: string) => {
         if (checkboxState === '') {
-            setBuggiez(buggyData)
+            setBuggiez(buggyData.buggiez)
         } else {
             const filterResult = [...buggiez].filter((element) => element.color === checkboxState)
 
@@ -85,12 +86,14 @@ export default function Buggiez() {
         setBuggiez(sortResult)
     }
 
-    const sortPriceDescending = ()=> {
+    const sortPriceDescending = () => {
         const sortResult = [...buggiez].sort((a, b) => {
             return b.price - a.price
         })
         setBuggiez(sortResult)
     }
+
+
 
     return (
 
@@ -100,23 +103,26 @@ export default function Buggiez() {
             </div>
 
             <div className='p-1 flex mr-auto flex-col items-center'>
-                <SortOrder sortAToZ={sortAToZ} sortZToA={sortZToA} sortPriceAscending={sortPriceAscending} sortPriceDescending={sortPriceDescending}/>
+                <SortOrder sortAToZ={sortAToZ} sortZToA={sortZToA} sortPriceAscending={sortPriceAscending} sortPriceDescending={sortPriceDescending} />
                 <CategoryNameAndDescription categoryName={urlPath} />
                 <div className='p-2'>
                     <span>
                         {
-                            buggiez.length > visibleCartItems && `Displaying ${visibleCartItems} out of ${buggiez.length} items.` ||
-                            buggiez.length <= visibleCartItems && `Displaying ${buggiez.length} items.`
+                            buggyData?.count != undefined && buggiez != undefined && `Displaying ${buggiez.length} out of ${buggyData?.count} items.`
+
                         }
                     </span>
                 </div>
                 {
-                    isLoading ? <span>Loading data...</span> : buggiez.slice(0, visibleCartItems).map((buggy) => {
+                    buggyData?.error && <div>Internal server error! Please refresh and try again!</div>
+                }
+                {
+                    isLoading ? <span>Loading data...</span> : buggiez != undefined && buggiez.map((buggy) => {
                         return <CategoryItem categoryItem={buggy} key={buggy.id} />
                     })
                 }
                 {
-                    buggiez.length >= visibleCartItems && <div className='p-1'>
+                    buggiez?.length >= visibleCartItems && <div className='p-1'>
                         <button onClick={loadMoreProducts} className="p-1 border rounded-xl border-red-600">Load More...</button>
                     </div>
 
