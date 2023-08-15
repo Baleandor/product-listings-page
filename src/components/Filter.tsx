@@ -1,32 +1,35 @@
 import type { CheckboxChangeEvent } from 'antd/es/checkbox'
 import { Checkbox } from 'antd';
 import { Slider } from 'antd';
+import { Dispatch, SetStateAction } from 'react';
 
 
 type FilterPropsType = {
-    setCheckboxFilter: (checkboxState: string) => void,
-    setPriceSliderFilter: (priceFilter: number[]) => void
+    setCheckboxColorFilter: (checkboxState: string) => void,
+    setPriceRange: React.Dispatch<React.SetStateAction<number[]>>,
+    setFetchPriceRange: Dispatch<SetStateAction<boolean>>
 }
 
 
-export default function Filter({ setCheckboxFilter, setPriceSliderFilter }: FilterPropsType) {
+export default function Filter({ setCheckboxColorFilter, setPriceRange, setFetchPriceRange }: FilterPropsType) {
 
     const onCheckboxChange = (e: CheckboxChangeEvent) => {
 
         if (e.target.checked && e.target.name) {
-            setCheckboxFilter(e.target.name)
+            setCheckboxColorFilter(e.target.name)
         } else {
-            setCheckboxFilter('')
+            setCheckboxColorFilter('')
         }
     }
 
     const onSliderChange = (e: number[]) => {
-        setPriceSliderFilter(e)
+        setPriceRange(e)
+        setFetchPriceRange(true)
     }
 
 
     return (
-        <div className="p-2 flex flex-col mr-auto w-48 bg-lime-900">
+        <div className="p-1 flex flex-col self-start mr-auto w-48 bg-lime-900">
             <span className="p-1">Filter by:</span>
             <div className="p-1">
                 <div className="p-1">Color</div>
