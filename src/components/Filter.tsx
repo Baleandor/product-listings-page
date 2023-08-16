@@ -29,7 +29,7 @@ export default function Filter({ setCheckboxColorFilter, setPriceRange, setFetch
 
 
     return (
-        <div className="p-1 flex flex-col self-start mr-auto w-48 bg-lime-900">
+        <div className="p-1 flex flex-col self-start  w-48 bg-lime-900">
             <span className="p-1">Filter by:</span>
             <div className="p-1">
                 <div className="p-1">Color</div>

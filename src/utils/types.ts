@@ -1,7 +1,7 @@
 import { PostgrestError } from "@supabase/supabase-js"
 import { UseQueryResult } from "@tanstack/react-query"
 
-export type productType = {
+export type ProductType = {
     color: string
     description: string
     id: string
@@ -11,13 +11,13 @@ export type productType = {
     rating: number
 }
 
-export type categoryNameAndDescriptionType =
+export type CategoryNameAndDescriptionType =
     { [key: string]: { name: string, description: string } }
 
 
-export type supabaseQueryCallType =
+export type SupabaseQueryCallType =
     UseQueryResult<{
-        data: productType[] | null;
+        data: ProductType[] | null;
         error: PostgrestError | null;
         count: number
     }, unknown>

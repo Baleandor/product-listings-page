@@ -3,13 +3,13 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { supabaseApiCalls } from "../api/supabaseApiCalls";
 import CategoryNameAndDescription from "../components/CategoryNameAndDescription";
 import { displayedNumberOfItems } from "../utils/numberOfItemsDisplayedAtOneTime";
-import { productType } from "../utils/types";
+import { ProductType } from "../utils/types";
 
 
 type ProductListingsPropsType = {
     category: string,
-    setProducts: Dispatch<SetStateAction<productType[] | null>>,
-    products: productType[] | null,
+    setProducts: Dispatch<SetStateAction<ProductType[] | null>>,
+    products: ProductType[] | null,
     visibleCartItems: number,
     setVisibleCartItems: React.Dispatch<React.SetStateAction<number>>,
     checkboxColorFilter: string,
@@ -53,49 +53,49 @@ export default function ProductListings({
 
     useEffect(() => {
         if (getAllData != undefined && !allDataError) {
-            setProducts(getAllData?.data)
+            setProducts(getAllData.data)
         }
-    }, [getAllData])
+    }, [getAllData, allDataError])
 
     useEffect(() => {
         if (colorData != undefined && getAllData != undefined && !colorDataError) {
             if (checkboxColorFilter === '') {
-                setProducts(getAllData?.data)
+                setProducts(getAllData.data)
             } else {
-                setProducts(colorData?.data)
+                setProducts(colorData.data)
             }
         }
-    }, [checkboxColorFilter, colorData])
+    }, [checkboxColorFilter, colorData, colorDataError])
 
     useEffect(() => {
         if (descendSortPrice != undefined && fetchDescendingPriceOrder && !descendPriceSortError) {
-            setProducts(descendSortPrice?.data)
+            setProducts(descendSortPrice.data)
         }
-    }, [fetchDescendingPriceOrder, descendSortPrice])
+    }, [fetchDescendingPriceOrder, descendSortPrice, descendPriceSortError])
 
     useEffect(() => {
         if (descendSortAlphabetic != undefined && fetchDescendingAlphabeticOrder && !descendAlphaSortError) {
-            setProducts(descendSortAlphabetic?.data)
+            setProducts(descendSortAlphabetic.data)
         }
-    }, [fetchDescendingAlphabeticOrder, descendSortAlphabetic])
+    }, [fetchDescendingAlphabeticOrder, descendSortAlphabetic, descendAlphaSortError])
 
     useEffect(() => {
         if (ascendSortAlphabetic != undefined && fetchAscendingAlphabeticOrder && !ascendAlphaSortError) {
-            setProducts(ascendSortAlphabetic?.data)
+            setProducts(ascendSortAlphabetic.data)
         }
-    }, [fetchDescendingAlphabeticOrder, ascendSortAlphabetic])
+    }, [fetchDescendingAlphabeticOrder, ascendSortAlphabetic, ascendAlphaSortError])
 
     useEffect(() => {
         if (ascendSortPrice != undefined && fetchAscendingPriceOrder && !ascendSortPriceError) {
-            setProducts(ascendSortPrice?.data)
+            setProducts(ascendSortPrice.data)
         }
-    }, [fetchAscendingPriceOrder, ascendSortPrice])
+    }, [fetchAscendingPriceOrder, ascendSortPrice, ascendSortPriceError])
 
     useEffect(() => {
         if (priceRangeData != undefined && fetchPriceRange && !priceRangeError) {
-            setProducts(priceRangeData?.data)
+            setProducts(priceRangeData.data)
         }
-    }, [fetchPriceRange, priceRange, priceRangeData])
+    }, [fetchPriceRange, priceRange, priceRangeData, priceRangeError])
 
     const loadMoreProducts = () => {
         setVisibleCartItems((prevState: number) => prevState + displayedNumberOfItems)
@@ -103,12 +103,10 @@ export default function ProductListings({
 
 
     return (
-        <div>
-            <div>
-                <CategoryNameAndDescription categoryName={category} />
-            </div>
+        <div className="flex flex-col ">
+            <CategoryNameAndDescription categoryName={category} />
             <div className='flex p-1'>
-                <div className='p-1 flex mr-auto flex-col items-center'>
+                <div className='p-1 flex mx-auto flex-col items-center'>
                     <div className='p-2'>
                         <span>
                             {
@@ -117,18 +115,13 @@ export default function ProductListings({
                         </span>
                     </div>
 
-                    {getAllData?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {colorData?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {descendSortAlphabetic?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {ascendSortAlphabetic?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {descendSortPrice?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {ascendSortPrice?.error && <div>Internal server error! Please refresh and try again!</div>}
-                    {priceRangeData?.error && <div>Internal server error! Please refresh and try again!</div>}
+                    {(getAllData?.error || colorData?.error || descendSortAlphabetic?.error || ascendSortAlphabetic?.error || descendSortPrice?.error || ascendSortPrice?.error || priceRangeData?.error) && <div>Internal server error! Please refresh and try again!</div>}
+
 
                     {
                         products != undefined && products.map((buggy) => {
                             return (
-                                <div key={buggy.id}>
+                                <div key={buggy.id} className="w-full">
                                     <CategoryItem categoryItem={buggy} />
                                 </div>
                             )

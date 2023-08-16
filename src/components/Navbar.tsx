@@ -18,7 +18,7 @@ export default function Navbar({ setCategory, setVisibleCartItems, category }: N
 
 
     return (
-        <div className="p-2 flex items-center justify-center sticky ">
+        <div className="p-2 flex items-center space-bt sticky ">
             <div className="w-28 h-28 mr-auto">
                 <img
                     className="w-28 h-28 rounded-full"

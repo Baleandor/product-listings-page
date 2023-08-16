@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
 import { supabase } from "../supabase/supabase"
-import { supabaseQueryCallType } from "../utils/types"
+import { SupabaseQueryCallType } from "../utils/types"
 
 const getAllItemsQuery = (nextPage: number, itemsCategory: string) => {
-    const buggyData: supabaseQueryCallType = useQuery({
+    const buggyData: SupabaseQueryCallType = useQuery({
         queryKey: ['buggiez', nextPage, itemsCategory],
         queryFn: async () => {
             const { data, error, count } = await supabase
@@ -19,7 +19,7 @@ const getAllItemsQuery = (nextPage: number, itemsCategory: string) => {
 }
 
 const getFilteredByColor = (color: string, category: string, visibleCartItems: number) => {
-    const filteredByColor: supabaseQueryCallType = useQuery({
+    const filteredByColor: SupabaseQueryCallType = useQuery({
         queryKey: ['filteredByColor', color, visibleCartItems, category],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -35,7 +35,7 @@ const getFilteredByColor = (color: string, category: string, visibleCartItems: n
 }
 
 const getFilteredByPriceRange = (priceRange: number[], category: string, visibleCartItems: number, fetchPriceRange: boolean) => {
-    const filteredByPriceRange: supabaseQueryCallType = useQuery({
+    const filteredByPriceRange: SupabaseQueryCallType = useQuery({
         queryKey: ['filteredByPriceRange', priceRange, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -54,7 +54,7 @@ const getFilteredByPriceRange = (priceRange: number[], category: string, visible
 }
 
 const getDescendingAlphabeticSortOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const sortOrder: supabaseQueryCallType = useQuery({
+    const sortOrder: SupabaseQueryCallType = useQuery({
         queryKey: ['descendingAlphabeticSortOrder', category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -71,7 +71,7 @@ const getDescendingAlphabeticSortOrder = (category: string, visibleCartItems: nu
 }
 
 const getAscendingAlphabeticSortOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const sortOrder: supabaseQueryCallType = useQuery({
+    const sortOrder: SupabaseQueryCallType = useQuery({
         queryKey: ['ascendingAlphabeticSortOrder', category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -88,7 +88,7 @@ const getAscendingAlphabeticSortOrder = (category: string, visibleCartItems: num
 }
 
 const getDescendingPriceOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const sortOrder: supabaseQueryCallType = useQuery({
+    const sortOrder: SupabaseQueryCallType = useQuery({
         queryKey: ['descendingPriceSortOrder', category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -105,7 +105,7 @@ const getDescendingPriceOrder = (category: string, visibleCartItems: number, fet
     return sortOrder
 }
 const getAscendingPriceOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const sortOrder: supabaseQueryCallType = useQuery({
+    const sortOrder: SupabaseQueryCallType = useQuery({
         queryKey: ['ascendingPriceSortOrder', category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
@@ -123,7 +123,7 @@ const getAscendingPriceOrder = (category: string, visibleCartItems: number, fetc
 }
 
 const getAscendingSortOrder = (category: string, sortType: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const sortOrder: supabaseQueryCallType = useQuery({
+    const sortOrder: SupabaseQueryCallType = useQuery({
         queryKey: ['AscendingSortOrder', sortType, category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
