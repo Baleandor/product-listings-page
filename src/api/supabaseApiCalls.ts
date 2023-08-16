@@ -1,37 +1,32 @@
 import { useQuery } from "@tanstack/react-query"
 import { supabase } from "../supabase/supabase"
+import { supabaseQueryCallType } from "../utils/types"
 
 const getAllItemsQuery = (nextPage: number, itemsCategory: string) => {
-    const supabasePageNumber = nextPage - 1
-    const buggyData = useQuery({
-        queryKey: ['buggiez', supabasePageNumber, itemsCategory],
+    const buggyData: supabaseQueryCallType = useQuery({
+        queryKey: ['buggiez', nextPage, itemsCategory],
         queryFn: async () => {
-
             const { data, error, count } = await supabase
                 .from(itemsCategory)
                 .select('*', { count: "exact" })
-                .range(0, supabasePageNumber)
+                .range(0, nextPage)
 
             return { data, count, error }
         }
-
     })
 
     return buggyData
 }
 
 const getFilteredByColor = (color: string, category: string, visibleCartItems: number) => {
-    const pageNumber = visibleCartItems - 1
-
-
-    const filteredByColor = useQuery({
-        queryKey: ['filteredByColor', color, pageNumber, category],
+    const filteredByColor: supabaseQueryCallType = useQuery({
+        queryKey: ['filteredByColor', color, visibleCartItems, category],
         queryFn: async () => {
             const { data, error } = await supabase
                 .from(category)
                 .select('*')
                 .eq('color', color)
-                .range(0, pageNumber)
+                .range(0, visibleCartItems)
 
             return { data, error }
         }
@@ -40,34 +35,85 @@ const getFilteredByColor = (color: string, category: string, visibleCartItems: n
 }
 
 const getFilteredByPriceRange = (priceRange: number[], category: string, visibleCartItems: number, fetchPriceRange: boolean) => {
-    const pageNumber = visibleCartItems - 1
-    const filteredByPriceRange = useQuery({
-        queryKey: ['filteredByPriceRange', priceRange, pageNumber],
-        queryFn: async () => {
-            const { data, error, count } = await supabase
-                .from(category)
-                .select('*')
-                .gte('price', priceRange[0])
-                .lte('price', priceRange[1])
-                .range(0, pageNumber)
-
-            return { data, error, count }
-        },
-        enabled: fetchPriceRange
-    })
-    return filteredByPriceRange
-}
-
-const getDescendingSortOrder = (category: string, sortType: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const pageNumber = visibleCartItems - 1
-    const sortOrder = useQuery({
-        queryKey: ['descendingSortOrder', sortType, category, visibleCartItems],
+    const filteredByPriceRange: supabaseQueryCallType = useQuery({
+        queryKey: ['filteredByPriceRange', priceRange, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
                 .from(category)
                 .select('*')
-                .order(sortType, { ascending: false })
-                .range(0, pageNumber)
+                .gte('price', priceRange[0])
+                .lte('price', priceRange[1])
+                .range(0, visibleCartItems)
+
+            return { data, error }
+        },
+        enabled: fetchPriceRange
+    })
+
+    return filteredByPriceRange
+}
+
+const getDescendingAlphabeticSortOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
+    const sortOrder: supabaseQueryCallType = useQuery({
+        queryKey: ['descendingAlphabeticSortOrder', category, visibleCartItems],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from(category)
+                .select('*')
+                .order('name', { ascending: false })
+                .range(0, visibleCartItems)
+
+            return { data, error }
+        },
+        enabled: fetchOrder
+    })
+    return sortOrder
+}
+
+const getAscendingAlphabeticSortOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
+    const sortOrder: supabaseQueryCallType = useQuery({
+        queryKey: ['ascendingAlphabeticSortOrder', category, visibleCartItems],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from(category)
+                .select('*')
+                .order('name', { ascending: true })
+                .range(0, visibleCartItems)
+
+            return { data, error }
+        },
+        enabled: fetchOrder
+    })
+    return sortOrder
+}
+
+const getDescendingPriceOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
+    const sortOrder: supabaseQueryCallType = useQuery({
+        queryKey: ['descendingPriceSortOrder', category, visibleCartItems],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from(category)
+                .select('*')
+                .order('price', { ascending: false })
+                .range(0, visibleCartItems)
+
+
+            return { data, error }
+        },
+        enabled: fetchOrder
+    })
+    return sortOrder
+}
+const getAscendingPriceOrder = (category: string, visibleCartItems: number, fetchOrder: boolean) => {
+    const sortOrder: supabaseQueryCallType = useQuery({
+        queryKey: ['ascendingPriceSortOrder', category, visibleCartItems],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from(category)
+                .select('*')
+                .order('price', { ascending: true })
+                .range(0, visibleCartItems)
+
 
             return { data, error }
         },
@@ -77,15 +123,14 @@ const getDescendingSortOrder = (category: string, sortType: string, visibleCartI
 }
 
 const getAscendingSortOrder = (category: string, sortType: string, visibleCartItems: number, fetchOrder: boolean) => {
-    const pageNumber = visibleCartItems - 1
-    const sortOrder = useQuery({
+    const sortOrder: supabaseQueryCallType = useQuery({
         queryKey: ['AscendingSortOrder', sortType, category, visibleCartItems],
         queryFn: async () => {
             const { data, error } = await supabase
                 .from(category)
                 .select('*')
                 .order(sortType, { ascending: true })
-                .range(0, pageNumber)
+                .range(0, visibleCartItems)
 
             return { data, error }
         },
@@ -98,6 +143,9 @@ export const supabaseApiCalls = {
     getAllItemsQuery,
     getFilteredByColor,
     getFilteredByPriceRange,
-    getDescendingSortOrder,
-    getAscendingSortOrder
+    getDescendingAlphabeticSortOrder,
+    getAscendingSortOrder,
+    getDescendingPriceOrder,
+    getAscendingAlphabeticSortOrder,
+    getAscendingPriceOrder
 }

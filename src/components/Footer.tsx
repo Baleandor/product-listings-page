@@ -5,5 +5,6 @@ export default function Footer() {
             <a href={'http://google.com'} className="p-1">Kontact Me</a>
             <a href={'http://google.com'} className="p-1">Turms & Kundishuns</a>
             <a href={'http://google.com'} className="p-1">Privacie Policie</a>
-        </div>)
+        </div>
+    )
 }

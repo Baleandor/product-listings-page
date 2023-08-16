@@ -1,1 +1,3 @@
-export const displayedNumberOfItems = 5
+const numberOfProductsClientWantsDisplayed = 5
+
+export const displayedNumberOfItems = numberOfProductsClientWantsDisplayed - 1

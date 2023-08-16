@@ -30,8 +30,8 @@ export default function CategoryItem({ categoryItem }: CategoryItemPropsType) {
 
     return (
         <div className="border rounded-xl border-green-400 p-1 mb-2 flex items-center w-[700px]" key={categoryItem.id}>
-            <div>
-                <div className="p-1"><img className="w-60 h-52 rounded-lg" src={categoryItem.image}></img></div>
+            <div className="w-60 h-52">
+                <div className="p-1"><img className="w-56 h-48 rounded-lg" src={categoryItem.image}></img></div>
             </div>
             <div className="p-2">
                 <div className="p-1"><span>Name: {categoryItem.name}</span></div>
