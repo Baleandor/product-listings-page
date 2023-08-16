@@ -1,4 +1,6 @@
-export const categoryNameAndDescription = {
+import { categoryNameAndDescriptionType } from "./types";
+
+export const categoryNameAndDescription: categoryNameAndDescriptionType = {
     buggiez: {
         name: 'Buggiez',
         description: 'Deez are da best vehikles an ork invest his teef in! Fast! LOADS OF DAKKA! An da red ones go even fasta!'

@@ -2,13 +2,18 @@ import { useState } from "react"
 
 
 type SortOrderPropsType = {
-    setSortAscendingType: React.Dispatch<React.SetStateAction<string>>,
-    setFetchAscendingOrder: React.Dispatch<React.SetStateAction<boolean>>,
-    setSortDescendingType: React.Dispatch<React.SetStateAction<string>>,
-    setFetchDescendingOrder: React.Dispatch<React.SetStateAction<boolean>>
+    setFetchDescendingAlphabeticOrder: React.Dispatch<React.SetStateAction<boolean>>,
+    setFetchDescendingPriceOrder: React.Dispatch<React.SetStateAction<boolean>>,
+    setFetchAscendingAlphabeticOrder: React.Dispatch<React.SetStateAction<boolean>>,
+    setFetchAscendingPriceOrder: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export default function SortOrder({ setSortAscendingType, setFetchAscendingOrder, setSortDescendingType, setFetchDescendingOrder }: SortOrderPropsType) {
+export default function SortOrder({
+    setFetchDescendingAlphabeticOrder,
+    setFetchDescendingPriceOrder,
+    setFetchAscendingAlphabeticOrder,
+    setFetchAscendingPriceOrder
+}: SortOrderPropsType) {
 
     const [toggleSortDropdownVisibility, setToggleSortDropdownVisibility] = useState(false)
 
@@ -16,14 +21,32 @@ export default function SortOrder({ setSortAscendingType, setFetchAscendingOrder
         setToggleSortDropdownVisibility(!toggleSortDropdownVisibility)
     }
 
-    const handleOnClickAscendingSortType = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        setSortAscendingType((e.target as HTMLInputElement).value)
-        setFetchAscendingOrder(true)
+    const handleOnClickDescendingAlphaSortType = () => {
+        setFetchDescendingAlphabeticOrder(true)
+        setFetchDescendingPriceOrder(false)
+        setFetchAscendingAlphabeticOrder(false)
+        setFetchAscendingPriceOrder(false)
     }
 
-    const handleOnClickDescendingSortType = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        setSortDescendingType((e.target as HTMLInputElement).value)
-        setFetchDescendingOrder(true)
+    const handleOnClickAscendingAlphaSortType = () => {
+        setFetchAscendingAlphabeticOrder(true)
+        setFetchDescendingPriceOrder(false)
+        setFetchDescendingAlphabeticOrder(false)
+        setFetchAscendingPriceOrder(false)
+    }
+
+    const handleOnClickDescendingPriceOrder = () => {
+        setFetchDescendingPriceOrder(true)
+        setFetchDescendingAlphabeticOrder(false)
+        setFetchAscendingAlphabeticOrder(false)
+        setFetchAscendingPriceOrder(false)
+    }
+
+    const handleOnClickAscendingPriceOrder = () => {
+        setFetchAscendingPriceOrder(true)
+        setFetchDescendingAlphabeticOrder(false)
+        setFetchAscendingAlphabeticOrder(false)
+        setFetchDescendingPriceOrder(false)
     }
 
     return (
@@ -32,19 +55,13 @@ export default function SortOrder({ setSortAscendingType, setFetchAscendingOrder
             {
                 toggleSortDropdownVisibility &&
                 <div className="p-1 absolute top-[165px] flex flex-col">
-                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'name'} onClick={handleOnClickAscendingSortType}>Alphabetical A-Z</button>
-                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'name'} onClick={handleOnClickDescendingSortType}>Alphabetical Z-A</button>
-                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'price'} onClick={handleOnClickAscendingSortType}>Price Ascending</button>
-                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'price'} onClick={handleOnClickDescendingSortType}>Price Descending</button>
+                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'name'} onClick={handleOnClickAscendingAlphaSortType}>Alphabetical A-Z</button>
+                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'name'} onClick={handleOnClickDescendingAlphaSortType}>Alphabetical Z-A</button>
+                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'price'} onClick={handleOnClickAscendingPriceOrder}>Price Ascending</button>
+                    <button className="p-1 bg-lime-700 cursor-pointer hover:underline" value={'price'} onClick={handleOnClickDescendingPriceOrder}>Price Descending</button>
                 </div>
             }
 
         </div>
     )
 }
-
-
-// Alphabetical a-z
-// ii. Alphabetical z-a
-// iii. Price ascending.
-// iv. Price descending.

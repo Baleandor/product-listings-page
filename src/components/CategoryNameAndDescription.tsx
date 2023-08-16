@@ -7,6 +7,7 @@ type CategoryNameAndDescriptionType = {
 
 export default function CategoryNameAndDescription({ categoryName }: CategoryNameAndDescriptionType) {
 
+    
     return (
         <div className="p-1">
             <div className="p-1 flex items-center justify-center">
@@ -14,7 +15,7 @@ export default function CategoryNameAndDescription({ categoryName }: CategoryNam
                     {categoryNameAndDescription[categoryName]?.name}
                 </span>
             </div>
-            <div className="p-1 flex items-center justify-center">
+            <div className="p-1 flex items-center text-center justify-center">
                 <span>
                     {categoryNameAndDescription[categoryName]?.description}
                 </span>
