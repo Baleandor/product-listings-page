@@ -12,3 +12,5 @@ ascending and descending filters not playing nice, weird ass bug
 Something's making the whole page BODY shrink when filtering via price
 
 DO THE MOBILE VERSION
+
+for some reason changing the Navbar to a Header with a Navbar and Logo component just BREAKS the whole ass thing???
