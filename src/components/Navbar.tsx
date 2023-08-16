@@ -2,19 +2,23 @@ import { displayedNumberOfItems } from "../utils/numberOfItemsDisplayedAtOneTime
 
 type NavbarPropsType = {
     setCategory: React.Dispatch<React.SetStateAction<string>>,
-    setVisibleCartItems: React.Dispatch<any>
+    setVisibleCartItems: React.Dispatch<any>,
+    category: string
 }
 
-export default function Navbar({ setCategory,setVisibleCartItems }: NavbarPropsType) {
+export default function Navbar({ setCategory, setVisibleCartItems, category }: NavbarPropsType) {
 
     const handleOnCategoryClick = (e: React.MouseEvent<HTMLInputElement>) => {
-        setCategory((e.target as HTMLInputElement).value)
-        setVisibleCartItems(displayedNumberOfItems)
+        if (category !== (e.target as HTMLInputElement).value) {
+
+            setCategory((e.target as HTMLInputElement).value)
+            setVisibleCartItems(displayedNumberOfItems)
+        }
     }
 
 
     return (
-        <div className="p-2 flex items-center justify-center sticky z-10">
+        <div className="p-2 flex items-center justify-center sticky ">
             <div className="w-28 h-28 mr-auto">
                 <img
                     className="w-28 h-28 rounded-full"

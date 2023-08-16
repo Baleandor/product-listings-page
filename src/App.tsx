@@ -28,13 +28,13 @@ export default function App() {
   const [fetchDescendingOrder, setFetchDescendingOrder] = useState(false)
 
 
-  console.log(priceRange)
+
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="bg-lime-800 ">
-        <div className="sticky top-0 bg-lime-900">
-          <Navbar setCategory={setCategory} setVisibleCartItems={setVisibleCartItems} />
+        <div className="sticky top-0 bg-lime-900 z-10">
+          <Navbar category={category} setCategory={setCategory} setVisibleCartItems={setVisibleCartItems} />
         </div>
         <div className="p-1 flex mr-auto  items-center">
 
