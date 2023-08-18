@@ -46,7 +46,7 @@ export default function App() {
             setFetchPriceRange={setFetchPriceRange}
           />
         </div>
-        <div className="p-1 flex flex-col m-auto items-center">
+        <div className="p-1 flex flex-col m-auto items-center min-h-[auto]">
 
 
 
