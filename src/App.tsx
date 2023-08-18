@@ -39,18 +39,17 @@ export default function App() {
         <div className="sticky top-0 bg-lime-900 z-10">
           <Navbar category={category} setCategory={setCategory} setVisibleCartItems={setVisibleCartItems} />
         </div>
-        <div className='p-1 flex flex-col'>
-          <Filter
+       
+        <div className="p-1 flex  items-center min-h-[auto]">
+
+        <Filter
             setCheckboxColorFilter={setCheckboxColorFilter}
             setPriceRange={setPriceRange}
             setFetchPriceRange={setFetchPriceRange}
           />
-        </div>
-        <div className="p-1 flex flex-col m-auto items-center min-h-[auto]">
+<div className='flex flex-col items-center justify-center m-auto'>
 
-
-
-          <SortOrder
+<SortOrder
             setFetchDescendingAlphabeticOrder={setFetchDescendingAlphabeticOrder}
             setFetchDescendingPriceOrder={setFetchDescendingPriceOrder}
             setFetchAscendingAlphabeticOrder={setFetchAscendingAlphabeticOrder}
@@ -70,6 +69,7 @@ export default function App() {
             fetchDescendingPriceOrder={fetchDescendingPriceOrder}
             fetchAscendingPriceOrder={fetchAscendingPriceOrder}
           />
+</div>
 
 
 
