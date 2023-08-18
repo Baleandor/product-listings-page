@@ -103,7 +103,7 @@ export default function ProductListings({
 
 
     return (
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
             <CategoryNameAndDescription categoryName={category} />
             <div className='flex p-1'>
                 <div className='p-1 flex mx-auto flex-col items-center'>
