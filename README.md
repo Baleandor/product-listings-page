@@ -1,5 +1,7 @@
 # Product Listings Page Documentation
 
+# DISCLAIMER! If the app does not connect to the supabase backend, it means the free instance of that database has been frozen and I need to unfreeze it manually. Please contact me via email so that I can do so when needed. Thanks!
+
 ## Summary
 
 The Product Listings Page is a straightforward web application that dynamically displays a list of products. Users can conveniently filter the products based on color and price range to find items that match their preferences. The application also features an "Add to Cart" button, which provides user feedback upon being clicked. The app is built using React and leverages essential libraries such as Ant Design, Supabase, and React Query to deliver an engaging and responsive user experience.
